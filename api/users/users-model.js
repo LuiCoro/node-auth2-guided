@@ -9,6 +9,8 @@ module.exports = {
 
 function find() {
   return db("users as u")
+      // Here the user tables is renamed to -> u & the role table is renamed to -> r
+      // here the tables join together and the users' role is set to the role ID inside the role table
       .join("roles as r", "u.role", "=", "r.id")
       .select("u.id", "u.username", "r.name as role")
 }
