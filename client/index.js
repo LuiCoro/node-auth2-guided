@@ -16,21 +16,21 @@ const handle = action => evt => {
   }
   fetch(`/api/auth/${action}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(credentials),
   })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      message.textContent = data.message
-      if (data.token) {
-        localStorage.setItem('token', data.token)
-      }
-    })
-    .catch(err => {
-      message.textContent = err.message
-      debugger
-    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        message.textContent = data.message
+        if (data.token) {
+          localStorage.setItem('token', data.token)
+        }
+      })
+      .catch(err => {
+        message.textContent = err.message
+        debugger
+      })
 }
 
 const logout = evt => {
@@ -49,24 +49,27 @@ const getUsers = evt => {
   const token = localStorage.getItem('token')
 
   fetch(`/api/users`, {
-    headers: token ? { 'Authorization': token } : {},
+    headers: token ? {'Authorization': token} : {},
   })
-    .then(res => {
-      return res.json()
-    })
-    .then(users => {
-      console.log(users)
-      if (Array.isArray(users)) {
-        users.forEach(user => {
-          const div = document.createElement('div')
-          div.textContent = user.username
-          userList.append(div)
-        })
-      } else {
-        message.textContent = users.message
-      }
-    })
-    .catch(err => { message.textContent = err.message; debugger })
+      .then(res => {
+        return res.json()
+      })
+      .then(users => {
+        console.log(users)
+        if (Array.isArray(users)) {
+          users.forEach(user => {
+            const div = document.createElement('div')
+            div.textContent = user.username
+            userList.append(div)
+          })
+        } else {
+          message.textContent = users.message
+        }
+      })
+      .catch(err => {
+        message.textContent = err.message;
+        debugger
+      })
 }
 
 registerBtn.addEventListener('click', handle('register'))

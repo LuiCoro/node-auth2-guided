@@ -9,15 +9,15 @@ module.exports = {
 
 function find() {
   return db("users as u")
-    .join("roles as r", "u.role", "=", "r.id")
-    .select("u.id", "u.username", "r.name as role")
+      .join("roles as r", "u.role", "=", "r.id")
+      .select("u.id", "u.username", "r.name as role")
 }
 
 function findBy(filter) {
   return db("users as u")
-    .join("roles as r", "u.role", "=", "r.id")
-    .select("u.id", "u.username", "r.name as role", "u.password")
-    .where(filter)
+      .join("roles as r", "u.role", "=", "r.id")
+      .select("u.id", "u.username", "r.name as role", "u.password")
+      .where(filter)
 }
 
 async function add(user) {
@@ -27,8 +27,8 @@ async function add(user) {
 
 function findById(id) {
   return db("users as u")
-    .join("roles as r", "u.role", "=", "r.id")
-    .select("u.id", "u.username", "r.name as role")
-    .where("u.id", id)
-    .first()
+      .join("roles as r", "u.role", "=", "r.id")
+      .select("u.id", "u.username", "r.name as role")
+      .where("u.id", id)
+      .first()
 }
